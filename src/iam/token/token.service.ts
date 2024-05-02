@@ -3,12 +3,14 @@ import { JwtService } from "@nestjs/jwt";
 import { JwtPropertyDto } from "../dto/jwt-property.dto";
 import { TokenStorageService } from "./token-storage.service";
 import { TokenDto } from "../dto/token.dto";
+import { FetchUserService } from "../fetch/fetch-user.service";
 
 @Injectable()
 export class TokenService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly tokenStorageService:TokenStorageService
+    private readonly tokenStorageService:TokenStorageService,
+    private readonly fetchUserService:FetchUserService
   ) {
   }
 
@@ -19,13 +21,13 @@ export class TokenService {
     };
   }
 
-  public async verifyAccessToken(tokenDto:TokenDto):Promise<JwtPropertyDto>{
+  public async verifyAccessToken(tokenDto:TokenDto){
     try {
       const payload = this.jwtService.verify(tokenDto.token);
       if (payload.tokenId){
         throw new UnauthorizedException();
       }
-      return payload;
+      return this.fetchUserService.findOneById(payload.sub);
     }catch (e) {
       throw new UnauthorizedException();
     }

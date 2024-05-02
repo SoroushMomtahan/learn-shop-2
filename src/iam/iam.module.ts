@@ -12,7 +12,7 @@ import { HashingController } from "./hashing/hashing.controller";
 import { AuthenticationController } from "./authentication/authentication.controller";
 import { AuthenticationService } from "./authentication/authentication.service";
 import { HttpModule } from "@nestjs/axios";
-import { FetchUserService } from "./authentication/fetch-user.service";
+import { FetchUserService } from "./fetch/fetch-user.service";
 
 @Module({
   imports: [

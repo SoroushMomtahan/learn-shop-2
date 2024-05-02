@@ -6,8 +6,8 @@ import { SignUpDto } from "../dto/sign-up.dto";
 import { SignInDto } from "../dto/sign-in.dto";
 import { HashingService } from "../hashing/abstract/hashing.service";
 import { TokenService } from "../token/token.service";
-import { FetchUserService } from "./fetch-user.service";
-import { FetchUserDto } from "../dto/fetch-user.dto";
+import { FetchUserService } from "../fetch/fetch-user.service";
+import { FetchUserDto } from "../fetch/fetch-user.dto";
 
 @Injectable()
 export class AuthenticationService {
