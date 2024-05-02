@@ -3,9 +3,11 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { UsersModule } from "./users/users.module";
 import { CommonModule } from "./common/common.module";
 import { IamModule } from "./iam/iam.module";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [
+    TypeOrmModule.forRoot({
     host: "localhost",
     port: 1433,
     type: "mssql",
@@ -18,6 +20,7 @@ import { IamModule } from "./iam/iam.module";
       encrypt:false
     }
   }),
+    ConfigModule.forRoot(),
     UsersModule, CommonModule, IamModule
   ],
   controllers: [],

@@ -1,5 +1,15 @@
-import { OmitType, PartialType, PickType } from "@nestjs/mapped-types";
-import { SignUpDto } from "./sign-up.dto";
+import { IsLowercase, IsNotEmpty, IsString, IsStrongPassword, MaxLength, MinLength } from "class-validator";
 
-export class SignInDto extends PickType(SignUpDto, ['username', "password"] as const) {
+export class SignInDto {
+  @MaxLength(20)
+  @MinLength(3)
+  @IsLowercase()
+  @IsString()
+  @IsNotEmpty()
+  username:string;
+
+  @MaxLength(24)
+  @IsStrongPassword()
+  @IsNotEmpty()
+  password:string;
 }

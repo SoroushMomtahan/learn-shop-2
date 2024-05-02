@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { RoleEnum } from "../enum/role.enum";
 
 @Entity()
 export class User {
@@ -7,12 +8,12 @@ export class User {
   id:number;
 
   @Column({
-    unique:true
+    nullable:true
   })
   firstname:string;
 
   @Column({
-    unique:true
+    nullable:true
   })
   lastname:string;
 
@@ -29,16 +30,16 @@ export class User {
   @Column({
     unique:true
   })
-  mobile:number;
+  mobile:string;
 
   @Column()
   password:string;
 
-  @Column()
+  @Column({default:true})
   status:boolean;
 
   @Column({default:RoleEnum.USER})
-  role:string;
+  role:RoleEnum;
 
   @CreateDateColumn()
   createAt:Date;

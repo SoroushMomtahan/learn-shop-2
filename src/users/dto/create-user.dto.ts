@@ -9,6 +9,7 @@ import {
   MaxLength, Min,
   MinLength
 } from "class-validator";
+import { RoleEnum } from "../enum/role.enum";
 
 export class CreateUserDto {
 
@@ -25,7 +26,7 @@ export class CreateUserDto {
   lastname:string;
 
   @MaxLength(20)
-  @MinLength(6)
+  @MinLength(3)
   @IsLowercase()
   @IsString()
   @IsNotEmpty()
@@ -37,9 +38,9 @@ export class CreateUserDto {
   email:string;
 
   @IsMobilePhone('fa-IR')
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  mobile:number;
+  mobile:string;
 
   @MaxLength(24)
   @IsStrongPassword()
@@ -52,5 +53,5 @@ export class CreateUserDto {
 
   @IsEnum(RoleEnum)
   @IsOptional()
-  role:string;
+  role:RoleEnum;
 }

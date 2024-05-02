@@ -1,5 +1,5 @@
 import { hash, hashSync, genSalt, compare, compareSync } from "bcrypt";
-import { HashingService } from "./hashing.service";
+import { HashingService } from "./abstract/hashing.service";
 
 export class BcryptService extends HashingService{
   public async hash(password: string){

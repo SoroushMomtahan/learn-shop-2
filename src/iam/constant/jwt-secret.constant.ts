@@ -1,0 +1,1 @@
+export const jwtSecretConstant = 'ow;ve;jvnm;evkoje;vjkoevwk;oevk;mw';

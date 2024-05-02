@@ -1,6 +1,6 @@
 import { IsEmail, IsNumber } from "class-validator";
 
-export class JwtPayload {
+export class JwtPropertyDto {
 
   @IsNumber()
   sub: number;

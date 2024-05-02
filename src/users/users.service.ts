@@ -4,7 +4,8 @@ import { User } from "./entity/user.entity";
 import { Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import { HashingService } from "../iam/hashing/hashing.service";
+import { HashingService } from "../iam/hashing/abstract/hashing.service";
+import { FindUserDto } from "./dto/find-user.dto";
 
 @Injectable()
 export class UsersService {
@@ -16,7 +17,6 @@ export class UsersService {
   }
 
   public async createOne(createUserDto: CreateUserDto) {
-
     const { password, ...others } = createUserDto;
 
     const hashedPassword = await this.hashingService.hash(password);
@@ -25,7 +25,6 @@ export class UsersService {
       password: hashedPassword,
       ...others
     });
-
     return this.userRepository.save(user);
   }
 
@@ -39,9 +38,15 @@ export class UsersService {
   public findOne(id: number) {
     return this.userRepository.findOneBy({ id });
   }
-
-  public findAll() {
-    return this.userRepository.find();
+  public findOneBy(findUserDto?:FindUserDto){
+    return this.userRepository.findOneBy({
+      ...findUserDto
+    });
+  }
+  public findAll(findUserDto?:FindUserDto) {
+    return this.userRepository.findBy({
+      ...findUserDto
+    });
   }
 
   public async removeOne(id: number) {
