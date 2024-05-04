@@ -42,6 +42,12 @@ export class UsersService {
     return this.userRepository.findOneBy({
       ...findUserDto
     });
+    // return this.userRepository.findOne({
+    //   where: {
+    //     ...findUserDto
+    //   },
+    //   select:['password', 'username']
+    // })
   }
   public findAll(findUserDto?:FindUserDto) {
     return this.userRepository.findBy({

@@ -8,6 +8,7 @@ import { HashingService } from "../hashing/abstract/hashing.service";
 import { TokenService } from "../token/token.service";
 import { FetchUserService } from "../fetch/fetch-user.service";
 import { FetchUserDto } from "../fetch/fetch-user.dto";
+import { TokenDto } from "../dto/token.dto";
 
 @Injectable()
 export class AuthenticationService {
@@ -43,8 +44,8 @@ export class AuthenticationService {
     return this.tokenService.generateToken({sub:user.id, email:user.email});
   }
 
-  public async signOut(id: number) {
-    // const user = await this.fetchUserService.({ id });
+  public async signOut(token:string) {
+    return this.tokenService.deleteGeneratedToken(token);
   }
 
 }

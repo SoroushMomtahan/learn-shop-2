@@ -1,5 +1,4 @@
 import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
-import { Observable } from "rxjs";
 import * as process from "process";
 import { Reflector } from "@nestjs/core";
 import { PUBLIC_KEY } from "./decorator/public.decorator";

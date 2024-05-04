@@ -1,5 +1,15 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity, JoinTable,
+  ManyToMany, OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from "typeorm";
 import { RoleEnum } from "../enum/role.enum";
+import { Course } from "../../courses/entity/course.entity";
+import { Comment } from "../../comments/entity/comment.entity";
 
 @Entity()
 export class User {
@@ -40,6 +50,13 @@ export class User {
 
   @Column({default:RoleEnum.USER})
   role:RoleEnum;
+
+  @ManyToMany(type => Course, (course)=>course.users)
+  @JoinTable()
+  courses:Course[]
+
+  @OneToMany(type => Comment, (comment)=>comment.user)
+  comments:Comment[]
 
   @CreateDateColumn()
   createAt:Date;

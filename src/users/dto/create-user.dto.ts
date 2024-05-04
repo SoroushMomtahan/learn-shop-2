@@ -10,48 +10,51 @@ import {
   MinLength
 } from "class-validator";
 import { RoleEnum } from "../enum/role.enum";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateUserDto {
+  @ApiProperty({
+    default: 'soroush'
+  })
+  @MaxLength(50)
+  @MinLength(3)
+  @IsString()
+  @IsOptional()
+  firstname: string;
 
   @MaxLength(50)
   @MinLength(3)
   @IsString()
   @IsOptional()
-  firstname:string;
-
-  @MaxLength(50)
-  @MinLength(3)
-  @IsString()
-  @IsOptional()
-  lastname:string;
+  lastname: string;
 
   @MaxLength(20)
   @MinLength(3)
   @IsLowercase()
   @IsString()
   @IsNotEmpty()
-  username:string;
+  username: string;
 
   @IsLowercase()
   @IsEmail()
   @IsNotEmpty()
-  email:string;
+  email: string;
 
-  @IsMobilePhone('fa-IR')
+  @IsMobilePhone("fa-IR")
   @IsString()
   @IsNotEmpty()
-  mobile:string;
+  mobile: string;
 
   @MaxLength(24)
   @IsStrongPassword()
   @IsNotEmpty()
-  password:string;
+  password: string;
 
   @IsBoolean()
   @IsOptional()
-  status:boolean;
+  status: boolean;
 
   @IsEnum(RoleEnum)
   @IsOptional()
-  role:RoleEnum;
+  role: RoleEnum;
 }

@@ -4,6 +4,8 @@ import { UsersModule } from "./users/users.module";
 import { CommonModule } from "./common/common.module";
 import { IamModule } from "./iam/iam.module";
 import { ConfigModule } from "@nestjs/config";
+import { CommentsModule } from "./comments/comments.module";
+import { CoursesModule } from "./courses/courses.module";
 
 @Module({
   imports: [
@@ -21,7 +23,8 @@ import { ConfigModule } from "@nestjs/config";
     }
   }),
     ConfigModule.forRoot(),
-    UsersModule, CommonModule, IamModule
+    UsersModule, CommonModule, IamModule,
+    CommentsModule, CoursesModule
   ],
   controllers: [],
   providers: [],

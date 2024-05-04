@@ -25,4 +25,7 @@ $ npm i @nestjs/axios axios
 
 # config module
 $ npm i @nestjs/config
+
+# Swagger
+$ npm install @nestjs/swagger
 ```

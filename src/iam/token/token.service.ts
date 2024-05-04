@@ -9,70 +9,81 @@ import { FetchUserService } from "../fetch/fetch-user.service";
 export class TokenService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly tokenStorageService:TokenStorageService,
-    private readonly fetchUserService:FetchUserService
+    private readonly tokenStorageService: TokenStorageService,
+    private readonly fetchUserService: FetchUserService
   ) {
   }
 
-  public generateToken(jwtPropertyDto:JwtPropertyDto) {
+  public generateToken(jwtPropertyDto: JwtPropertyDto) {
+    const { sub, ...payload } = jwtPropertyDto;
+    const tokenId = crypto.randomUUID();
+    this.tokenStorageService.set(sub, tokenId);
+    const accessToken =  this.jwtService.sign({
+      sub,
+      tokenId,
+      ...payload
+    });
+    const refreshToken = this.jwtService.sign({
+      sub,
+      tokenId
+    }, {
+      expiresIn: "30d"
+    });
     return {
-      accessToken: this.generateAccessToken(jwtPropertyDto),
-      refreshToken: this.generateRefreshToken(jwtPropertyDto)
-    };
+      accessToken,
+      refreshToken
+    }
   }
 
-  public async verifyAccessToken(tokenDto:TokenDto){
+  public async verifyAccessToken(tokenDto: TokenDto) {
     try {
       const payload = this.jwtService.verify(tokenDto.token);
-      if (payload.tokenId){
+      const tokenId = await this.tokenStorageService.get(payload.sub);
+      if (tokenId !== payload.tokenId){
+        throw new UnauthorizedException();
+      }
+      if (!payload.email) {
         throw new UnauthorizedException();
       }
       return this.fetchUserService.findOneById(payload.sub);
-    }catch (e) {
+    } catch (e) {
       throw new UnauthorizedException();
     }
 
   }
 
-  public async refreshToken(tokenDto:TokenDto){
+  public async refreshToken(tokenDto: TokenDto) {
     const payload = await this.verifyRefreshToken(tokenDto);
-    const {sub, email} = payload;
+    const { sub, email } = payload;
     this.tokenStorageService.delete(sub);
-    return this.generateToken({sub, email});
+    return this.generateToken({ sub, email });
+  }
+
+  public async deleteGeneratedToken(accessToken:string){
+    try {
+      const payload = await this.verifyAccessToken({ token:accessToken });
+      const {id} = payload;
+      this.tokenStorageService.delete(id);
+      return payload
+    }catch (e){
+      throw new UnauthorizedException();
+    }
   }
 
   // ----------------------------- private ----------------------------
-  private generateAccessToken(jwtPayload:JwtPropertyDto) {
-    const {sub, ...payload} = jwtPayload;
-    return this.jwtService.sign({
-      sub,
-      ...payload
-    });
-  }
-
-  private generateRefreshToken(jwtPayload:JwtPropertyDto) {
-    const {sub, ...payload} = jwtPayload;
-    const tokenId = crypto.randomUUID();
-    this.tokenStorageService.set(sub, tokenId);
-    return this.jwtService.sign({
-      sub,
-      tokenId,
-      ...payload
-    }, {
-      expiresIn: '30d'
-    });
-  }
-
-  private async verifyRefreshToken(tokenDto: TokenDto):Promise<JwtPropertyDto> {
+  private async verifyRefreshToken(tokenDto: TokenDto): Promise<JwtPropertyDto> {
     try {
-      const payload = this.jwtService.verify(tokenDto.token)
+      const payload = this.jwtService.verify(tokenDto.token);
       const tokenId = await this.tokenStorageService.get(payload.sub);
-      if (tokenId !== payload.tokenId) {
+      if (payload.email) {
         throw new UnauthorizedException()
+      }
+      if (tokenId !== payload.tokenId) {
+        throw new UnauthorizedException();
       }
       return payload;
     } catch (e) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException();
     }
   }
 }

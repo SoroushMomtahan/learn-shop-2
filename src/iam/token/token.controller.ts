@@ -3,7 +3,9 @@ import { JwtPropertyDto } from "../dto/jwt-property.dto";
 import { TokenService } from "./token.service";
 import { TokenDto } from "../dto/token.dto";
 import { Public } from "../../common/decorator/public.decorator";
-
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+@ApiTags('iam')
+@ApiBearerAuth()
 @Controller('token')
 export class TokenController {
   constructor(
