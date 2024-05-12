@@ -1,32 +1,30 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UsersModule } from "./users/users.module";
-import { CommonModule } from "./common/common.module";
-import { IamModule } from "./iam/iam.module";
 import { ConfigModule } from "@nestjs/config";
-import { CommentsModule } from "./comments/comments.module";
-import { CoursesModule } from "./courses/courses.module";
+import { AdminModule } from "./admin/admin.module";
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-    host: "localhost",
-    port: 1433,
-    type: "mssql",
-    username: "sa",
-    password: "1234@abcd",
-    database: "learnShop2DB",
-    synchronize: true,
-    autoLoadEntities:true,
-    options:{
-      encrypt:false
-    }
-  }),
+      host: "localhost",
+      port: 1433,
+      type: "mssql",
+      username: "sa",
+      password: "1234@abcd",
+      database: "learnShop2DB",
+      synchronize: true,
+      autoLoadEntities: true,
+      options: {
+        encrypt: false
+      }
+    }),
+    // TypeOrmModule.forFeature([UserEntity, CourseEntity]),
     ConfigModule.forRoot(),
-    UsersModule, CommonModule, IamModule,
-    CommentsModule, CoursesModule
+    // TeacherModule
+    AdminModule
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
-export class AppModule {}
+export class AppModule {
+}

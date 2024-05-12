@@ -19,7 +19,10 @@ async function bootstrap() {
     stopAtFirstError:true,
     transform:true,
     whitelist:true,
-    forbidNonWhitelisted:true
+    forbidNonWhitelisted:true,
+    transformOptions: {
+      enableImplicitConversion:true
+    }
   }));
   // ----------------- Listen To Port ----------------------
   await app.listen(4000);
