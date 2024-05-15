@@ -1,43 +1,37 @@
 import { IsArray, IsIn, IsOptional, IsString } from "class-validator";
 
 import { UserPropertiesEnum } from "../../../enum/user-properties.enum";
+import { UserMethodsEnum } from "../../../enum/user.methods.enum";
 
-enum UserMethod {
-    create = "create",
-    findAll = "findAll",
-    findOne = "findOne",
-    updateOne = "updateOne",
-    deleteOne = "deleteOne"
-}
 
 export class PermissionMethodUserDto {
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [UserMethod.create]?: UserPropertiesEnum[];
+    [UserMethodsEnum.create]?: UserPropertiesEnum[];
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [UserMethod.findAll]?: UserPropertiesEnum[];
+    [UserMethodsEnum.findAll]?: UserPropertiesEnum[];
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [UserMethod.findOne]?: UserPropertiesEnum[];
+    [UserMethodsEnum.findOne]?: UserPropertiesEnum[];
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [UserMethod.updateOne]?: UserPropertiesEnum[];
+    [UserMethodsEnum.updateOne]?: UserPropertiesEnum[];
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [UserMethod.deleteOne]?: UserPropertiesEnum[];
+    [UserMethodsEnum.deleteOne]?: UserPropertiesEnum[];
 }

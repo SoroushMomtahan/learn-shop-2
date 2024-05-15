@@ -1,18 +1,15 @@
-import { IsArray, IsBoolean, IsIn, IsOptional, IsString, ValidateNested } from "class-validator";
-import { PermissionEntityDto } from "./permission-entity.dto";
+import { IsBoolean, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 
-
-
-
+import { PermissionEntityDto } from "./permission-entity.dto";
 
 export class PermissionDto {
     @ValidateNested()
-    @Type(()=>PermissionEntityDto)
+    @Type(() => PermissionEntityDto)
     @IsOptional()
     entities?: PermissionEntityDto;
 
     @IsBoolean()
     @IsOptional()
-    withDeleted?:Boolean = false
+    withDeleted?: Boolean = false;
 }

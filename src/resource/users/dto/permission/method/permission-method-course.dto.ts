@@ -3,43 +3,36 @@ import { IsArray, IsIn, IsOptional, IsString } from "class-validator";
 import { UserPropertiesEnum } from "../../../enum/user-properties.enum";
 
 import { CoursePropertiesEnum } from "../../../../common/enum/course-properties.enum";
-
-enum CourseMethod {
-    create = "create",
-    findAll = "findAll",
-    findOne = "findOne",
-    updateOne = "updateOne",
-    deleteOne = "deleteOne"
-}
+import { CourseMethodsEnum } from "../../../enum/course.methods.enum";
 
 export class PermissionMethodCourseDto {
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(CoursePropertiesEnum), {each:true})
     @IsOptional()
-    [CourseMethod.create]: CoursePropertiesEnum[]
+    [CourseMethodsEnum.create]: CoursePropertiesEnum[]
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [CourseMethod.findAll]: CoursePropertiesEnum[]
+    [CourseMethodsEnum.findAll]: CoursePropertiesEnum[]
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [CourseMethod.findOne]: CoursePropertiesEnum[]
+    [CourseMethodsEnum.findOne]: CoursePropertiesEnum[]
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [CourseMethod.updateOne]: CoursePropertiesEnum[]
+    [CourseMethodsEnum.updateOne]: CoursePropertiesEnum[]
 
     @IsArray()
     @IsString({each:true})
     @IsIn(Object.getOwnPropertyNames(UserPropertiesEnum), {each:true})
     @IsOptional()
-    [CourseMethod.deleteOne]: CoursePropertiesEnum[]
+    [CourseMethodsEnum.deleteOne]: CoursePropertiesEnum[]
 }
