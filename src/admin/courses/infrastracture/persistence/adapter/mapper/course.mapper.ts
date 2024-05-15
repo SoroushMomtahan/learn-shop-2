@@ -1,4 +1,4 @@
-import { CourseEntity } from "../../../../../../common/entity/course.entity";
+import { CourseEntity } from "../../../../../../resource/common/entity/course.entity";
 import { CourseModel } from "../../../../domain/course-model";
 import { UserMapper } from "../../../../../users/infrastructure/persistence/adapter/mapper/user.mapper";
 

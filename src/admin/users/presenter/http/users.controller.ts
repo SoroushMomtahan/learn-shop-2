@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { CreateUserDto1 } from "./dto/create-user.dto1";
 import { UsersFacade } from "../../application/users.facade";
 import { CreateUserCommand } from "../../application/command/create-user.command";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -26,7 +26,7 @@ export class UsersController {
     }
 
     @Post()
-    public create(@Body() createUserDto: CreateUserDto) {
+    public create(@Body() createUserDto: CreateUserDto1) {
         return this.adminFacade.create(createUserDto);
     }
 

@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { CreateUserCommand } from "../../../application/command/create-user.command";
 import { RoleEnum } from "../../../domain/value-object/role.enum";
 
-export class CreateUserDto {
+export class CreateUserDto1 {
   @ApiProperty({
     default: "soroush"
   })

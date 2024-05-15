@@ -9,7 +9,7 @@ import {
     UpdateDateColumn
 } from "typeorm";
 import { BaseEntity } from "./base.entity";
-import { RoleEnum } from "../enum/role.enum";
+import { RoleEnum } from "../../../common/enum/role.enum";
 import { CourseEntity } from "./course.entity";
 
 @Entity("users")

@@ -1,4 +1,4 @@
-import { UserEntity } from "../../../../../../common/entity/user.entity";
+import { UserEntity } from "../../../../../../resource/common/entity/user.entity";
 import { UserModel } from "../../../../domain/user-model";
 
 export class UserMapper {

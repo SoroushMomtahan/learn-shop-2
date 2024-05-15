@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CourseEntity } from "../../../../../common/entity/course.entity";
+import { CourseEntity } from "../../../../../resource/common/entity/course.entity";
 import { Repository } from "typeorm";
 import { ICourseRepository } from "../../../application/port/i-course.repository";
 import { CourseModel } from "src/admin/courses/domain/course-model";
 import { CourseMapper } from "./mapper/course.mapper";
 import { UsersService } from "../../../../../resource/users/users.service";
-import { UserEntity } from "../../../../../common/entity/user.entity";
+import { UserEntity } from "../../../../../resource/common/entity/user.entity";
 
 @Injectable()
 export class CourseService implements ICourseRepository {

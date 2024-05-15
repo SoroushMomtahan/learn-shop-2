@@ -1,7 +1,7 @@
 import { UserModel } from "src/admin/users/domain/user-model";
 import { IUserRepository } from "../../../application/port/i-user.repository";
 import { Repository } from "typeorm";
-import { UserEntity } from "../../../../../common/entity/user.entity";
+import { UserEntity } from "../../../../../resource/common/entity/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 import { ConflictException, HttpException, Injectable, NotFoundException } from "@nestjs/common";
 import { UserMapper } from "./mapper/user.mapper";
